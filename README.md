@@ -13,10 +13,15 @@ dart pub global activate mason_cli
 ## 📦 1. Criando um Novo Projeto do Zero
 Como você ainda não tem um projeto, precisaremos adicionar o brick de projeto globalmente ou rodá-lo direto do GitHub.
 
-Adicione o brick globalmente:
+Adicione o brick globalmente (No Windows, execute como Administrador se encontrar erro de caminhos longos):
 ```bash
-mason add -g clean_project --git-url https://github.com/shenioalves/flutter_template_mason --git-path clean_project
+mason add -g clean_project --git-url "https://github.com/shenioalves/flutter_template_mason.git" --git-path clean_project
 ```
+
+> **⚠️ Nota para usuários Windows:** Se você receber um erro `PathNotFoundException`, é provável que o limite de 260 caracteres do Windows esteja bloqueando a instalação. Execute o comando abaixo no PowerShell como Administrador para habilitar caminhos longos:
+> ```powershell
+> New-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\FileSystem" -Name "LongPathsEnabled" -Value 1 -PropertyType DWORD -Force
+> ```
 
 Gere o projeto (rode isso na pasta onde deseja que a pasta do app seja criada):
 ```bash
@@ -30,7 +35,7 @@ Após o projeto ter sido criado, entre na pasta dele. Para simplificar a criaç�
 bricks:
   clean_feature:
     git:
-      url: https://github.com/shenioalves/flutter_template_mason
+      url: https://github.com/shenioalves/flutter_template_mason.git
       path: clean_feature
 ```
 

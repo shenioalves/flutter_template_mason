@@ -13,4 +13,4 @@ vars:
     type: string
     description: "O nome da organização (ex: com.exemplo)"
     default: "com.exemplo"
-    prompt: "Qual o nome da organização?" 
+    prompt: "Qual o nome da organização?"
