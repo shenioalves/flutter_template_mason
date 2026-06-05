@@ -1,16 +1,16 @@
 name: clean_project
-description: Um projeto base Flutter com Clean Architecture, BLoC/Cubit e GetIt.
-
-version: 0.1.0+1
-
+description: "Um projeto base Flutter com Clean Architecture, BLoC/Cubit e GetIt."
+version: 0.1.0
+environment:
+  mason: ">=0.1.0-dev <0.2.0"
 vars:
   project_name:
     type: string
-    description: O nome do projeto (snake_case)
-    default: meu_app
-    prompt: Qual o nome do projeto?
+    description: "O nome do projeto (snake_case)"
+    default: "meu_app"
+    prompt: "Qual o nome do projeto?"
   org_name:
     type: string
-    description: O nome da organização (ex: com.exemplo)
-    default: com.exemplo
-    prompt: Qual o nome da organização?
+    description: "O nome da organização (ex: com.exemplo)"
+    default: "com.exemplo"
+    prompt: "Qual o nome da organização?" 

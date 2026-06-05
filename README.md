@@ -15,7 +15,7 @@ Como você ainda não tem um projeto, precisaremos adicionar o brick de projeto 
 
 Adicione o brick globalmente:
 ```bash
-mason add -g clean_project --git https://github.com/shenioalves/flutter_template_mason --path clean_project
+mason add -g clean_project --git-url https://github.com/shenioalves/flutter_template_mason --git-path clean_project
 ```
 
 Gere o projeto (rode isso na pasta onde deseja que a pasta do app seja criada):

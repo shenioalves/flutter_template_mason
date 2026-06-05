@@ -1,14 +1,11 @@
 name: clean_feature
-description: Gera uma feature completa em Clean Architecture com Domain, Data, Presentation (Cubit) e DI/Rotas.
-
+description: "Gera uma feature completa em Clean Architecture com Domain, Data, Presentation (Cubit) e DI/Rotas."
 version: 0.1.0
-
 environment:
   mason: ">=0.1.0-dev <0.2.0"
-
 vars:
   feature_name:
     type: string
-    description: O nome da feature (ex: auth, user_profile, product_list)
-    default: feature
-    prompt: Qual o nome da feature?
+    description: "O nome da feature (ex: auth, user_profile, product_list)"
+    default: "feature"
+    prompt: "Qual o nome da feature?"
