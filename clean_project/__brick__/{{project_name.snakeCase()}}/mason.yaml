@@ -1,0 +1,5 @@
+bricks:
+  clean_feature:
+    git:
+      url: https://github.com/shenioalves/flutter_template_mason.git
+      path: clean_feature

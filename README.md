@@ -29,17 +29,9 @@ mason make clean_project
 ```
 
 ## 📦 2. Criando Novas Features (No dia a dia)
-Após o projeto ter sido criado, entre na pasta dele. Para simplificar a criação de features no dia a dia, declare o brick de features no arquivo `mason.yaml` do seu projeto:
+O projeto gerado já vem com o arquivo `mason.yaml` pré-configurado. Basta entrar na pasta do projeto e executar:
 
-```yaml
-bricks:
-  clean_feature:
-    git:
-      url: https://github.com/shenioalves/flutter_template_mason.git
-      path: clean_feature
-```
-
-Baixe a dependência do brick:
+Baixe a dependência do brick (necessário apenas na primeira vez):
 ```bash
 mason get
 ```
