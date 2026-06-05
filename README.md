@@ -18,10 +18,22 @@ Adicione o brick globalmente (No Windows, execute como Administrador se encontra
 mason add -g clean_project --git-url "https://github.com/shenioalves/flutter_template_mason.git" --git-path clean_project
 ```
 
-> **⚠️ Nota para usuários Windows:** Se você receber um erro `PathNotFoundException`, é provável que o limite de 260 caracteres do Windows esteja bloqueando a instalação. Execute o comando abaixo no PowerShell como Administrador para habilitar caminhos longos:
+> **⚠️ Nota para usuários Windows (ERRO DE CAMINHO LONGO):**
+> Se você receber um erro `PathNotFoundException` ou `OS Error: O sistema não pode encontrar o caminho especificado`, é porque o limite de 260 caracteres do Windows foi atingido.
+>
+> **Para corrigir, execute os DOIS comandos abaixo no PowerShell como Administrador:**
+>
+> 1. Habilitar caminhos longos no Windows:
 > ```powershell
 > New-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\FileSystem" -Name "LongPathsEnabled" -Value 1 -PropertyType DWORD -Force
 > ```
+>
+> 2. Habilitar caminhos longos no Git:
+> ```powershell
+> git config --global core.longpaths true
+> ```
+>
+> *Após rodar os comandos, feche e abra o terminal novamente.*
 
 Gere o projeto (rode isso na pasta onde deseja que a pasta do app seja criada):
 ```bash

@@ -10,6 +10,8 @@ Este projeto já vem pré-configurado com os templates necessários.
 3. Digite o nome da feature quando solicitado.
 4. Registre o novo módulo gerado dentro de `InjectionContainer.init()`.
 
+> 💡 **Dica (Windows):** Se encontrar erro de "PathNotFoundException", execute `git config --global core.longpaths true` e habilite caminhos longos no Windows (Registry).
+
 ## 📂 Estrutura de uma Feature (Fluxo em "U")
 ### 1. Domain (Coração)
 * **Entities:** Objetos de negócio puros (sem `.fromJson`).
