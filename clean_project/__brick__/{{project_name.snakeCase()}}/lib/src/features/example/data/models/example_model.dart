@@ -1,29 +1,28 @@
-/*
+﻿/*
  * ARQUIVO: lib/src/features/example/data/models/example_model.dart
  * RESPONSABILIDADE: Realizar a ponte entre os dados brutos (JSON/DB) e a camada de domínio.
- * CAMINHO DOS DADOS EM U:
- * - VOLTA (Resposta): O DataSource retorna este Model, que é uma versão da Entity com capacidades de serialização.
+ * COMO USAR: Modelo de dados para serialização/deserialização (JSON).
  */
+
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../domain/entities/example_entity.dart';
 
-class ExampleModel extends ExampleEntity {
-  const ExampleModel({
-    required super.id,
-    required super.name,
-  });
+part 'example_model.freezed.dart';
+part 'example_model.g.dart';
 
-  factory ExampleModel.fromJson(Map<String, dynamic> json) {
-    return ExampleModel(
-      id: json['id'] as String,
-      name: json['name'] as String,
-    );
-  }
+@freezed
+abstract class ExampleModel with _$ExampleModel {
+  const ExampleModel._();
 
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'name': name,
-    };
+  const factory ExampleModel({required String id, required String name}) =
+      _ExampleModel;
+
+  factory ExampleModel.fromJson(Map<String, dynamic> json) =>
+      _$ExampleModelFromJson(json);
+
+  ExampleEntity toEntity() {
+    return ExampleEntity(id: id, name: name);
   }
 }
+

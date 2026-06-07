@@ -1,4 +1,4 @@
-# {{project_name.pascalCase()}}
+# AppQuizbiblicoMobile
 Aplicativo desenvolvido em Flutter seguindo os princípios de Clean Architecture e Feature-First.
 
 ## 🛠 Tecnologias e Versões

@@ -1,3 +1,8 @@
+﻿/*
+ * ARQUIVO: lib/src/core/utils/extensions/int_extension.dart
+ * RESPONSABILIDADE: Utilitários e extensões auxiliares
+ * COMO USAR: Extensões de conveniência para tipos nativos.
+ */
 extension IntExtension on int {
   /// Calculate whether a number is even:
   bool get isEven => this % 2 == 0;

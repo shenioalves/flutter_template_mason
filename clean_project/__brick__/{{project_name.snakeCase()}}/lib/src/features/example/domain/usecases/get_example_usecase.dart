@@ -1,10 +1,11 @@
-/*
+﻿/*
  * ARQUIVO: lib/src/features/example/domain/usecases/get_example_usecase.dart
  * RESPONSABILIDADE: Executar uma regra de negócio específica (Caso de Uso).
- * CAMINHO DOS DADOS EM U:
- * - IDA (Pedido): Chamado pelo Cubit/BLoC.
- * - VOLTA (Resposta): Retorna a Entity para a camada de Presentation.
+ * COMO USAR: Injetar no Cubit e chamar para executar regra de negócio.
  */
+
+import 'package:{{project_name.snakeCase()}}/src/core/utils/result/result.dart';
+import 'package:{{project_name.snakeCase()}}/src/features/example/data/failures/example_failures.dart';
 
 import '../entities/example_entity.dart';
 import '../repositories/example_repository.dart';
@@ -14,7 +15,8 @@ class GetExampleUseCase {
 
   GetExampleUseCase(this.repository);
 
-  Future<ExampleEntity> call(String id) async {
-    return await repository.getExample(id);
+  Future<Result<ExampleFailure, ExampleEntity>> call() async {
+    return await repository.getExample();
   }
 }
+

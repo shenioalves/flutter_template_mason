@@ -1,3 +1,8 @@
+﻿/*
+ * ARQUIVO: lib/src/core/utils/formatters.dart
+ * RESPONSABILIDADE: Utilitários e extensões auxiliares
+ * COMO USAR: Funções utilitárias para formatação de dados.
+ */
 // formatters.dart
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 

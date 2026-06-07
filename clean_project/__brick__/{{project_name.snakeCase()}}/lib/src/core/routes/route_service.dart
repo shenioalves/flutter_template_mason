@@ -1,13 +1,15 @@
 /*
  * ARQUIVO: lib/src/core/routes/route_service.dart
  * RESPONSABILIDADE: Orquestrar a navegação do aplicativo, centralizando rotas de múltiplos módulos.
- * PADRÃO: Service / Orchestrator. Isola a complexidade do GoRouter.
+ * COMO USAR: Service / Orchestrator. Isola a complexidade do GoRouter.
  */
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+
 import '../di/injector.dart';
 import '../modules/feature_module.dart';
+import '../ui/ui.dart';
 
 class RouteService {
   late final GoRouter _router;
@@ -24,21 +26,56 @@ class RouteService {
     for (final module in _modules) {
       // 1. Cada módulo registra o que precisa no Injector recebido
       module.registerDependencies(injector);
-      
+
       // 2. Coleta as rotas do módulo
       allRoutes.addAll(module.routes());
     }
 
     _router = GoRouter(
-      initialLocation: '/',
+      debugLogDiagnostics: true,
+      initialLocation: '/splash',
       routes: allRoutes,
       errorBuilder: (context, state) => Scaffold(
-        body: Center(child: Text('Rota não encontrada: ${state.uri}')),
+        backgroundColor: AppColors.white,
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Icon(
+                Icons.error_outline,
+                color: AppColors.red500,
+                size: 80,
+              ),
+              const SizedBox(height: 16),
+              Text(
+                'Ops! Algo deu errado',
+                style: AppTypography.bodyLarge.copyWith(
+                  color: AppColors.gray900,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                'Rota não encontrada: ${state.uri}',
+                style: AppTypography.bodyLarge.copyWith(
+                  color: AppColors.gray600,
+                ),
+              ),
+              const SizedBox(height: 24),
+              ElevatedButton(
+                onPressed: () => context.go('/splash'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.blue500,
+                  foregroundColor: AppColors.white,
+                ),
+                child: const Text('Voltar para o Início'),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
 
-  /// Transição padrão de Fade entre telas.
   static CustomTransitionPage buildPageTransitionDefault<T>({
     required BuildContext context,
     required GoRouterState state,

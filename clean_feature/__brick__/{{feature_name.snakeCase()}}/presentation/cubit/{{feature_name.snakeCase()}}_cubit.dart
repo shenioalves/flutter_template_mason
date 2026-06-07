@@ -1,3 +1,9 @@
+﻿/*
+ * ARQUIVO: lib/src/features/{{feature_name.snakeCase()}}/presentation/cubit/{{feature_name.snakeCase()}}_cubit.dart
+ * RESPONSABILIDADE: Gerenciar o estado da tela e coordenar a execução de UseCases.
+ * COMO USAR: Injetar via BlocProvider e acessar via context.read().
+ */
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../domain/usecases/get_{{feature_name.snakeCase()}}_usecase.dart';
 import '{{feature_name.snakeCase()}}_state.dart';
@@ -17,3 +23,4 @@ class {{feature_name.pascalCase()}}Cubit extends Cubit<{{feature_name.pascalCase
     }
   }
 }
+

@@ -1,3 +1,9 @@
+﻿/*
+ * ARQUIVO: lib/src/features/{{feature_name.snakeCase()}}/presentation/{{feature_name.snakeCase()}}_view.dart
+ * RESPONSABILIDADE: Camada de Apresentação (UI).
+ * COMO USAR: Instanciar e exibir como parte da navegação ou árvore de widgets.
+ */
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'cubit/{{feature_name.snakeCase()}}_cubit.dart';
@@ -30,3 +36,4 @@ class {{feature_name.pascalCase()}}View extends StatelessWidget {
     );
   }
 }
+

@@ -1,3 +1,8 @@
+﻿/*
+ * ARQUIVO: lib/src/core/utils/validators.dart
+ * RESPONSABILIDADE: Utilitários e extensões auxiliares
+ * COMO USAR: Funções utilitárias para validação de campos.
+ */
 import 'package:{{project_name.snakeCase()}}/src/core/utils/extensions/string_extension.dart';
 
 typedef Validator = String? Function(String?);
@@ -34,3 +39,4 @@ class Validators {
     return digits.length != 11 ? 'Telefone inválido' : null;
   }
 }
+

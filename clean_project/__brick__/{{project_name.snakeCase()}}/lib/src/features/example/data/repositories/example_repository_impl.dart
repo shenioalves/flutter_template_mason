@@ -1,22 +1,29 @@
-/*
+﻿/*
  * ARQUIVO: lib/src/features/example/data/repositories/example_repository_impl.dart
  * RESPONSABILIDADE: Implementar a interface do domínio, coordenando as fontes de dados.
- * CAMINHO DOS DADOS EM U:
- * - IDA (Pedido): Recebe a chamada do UseCase e repassa para o DataSource.
- * - VOLTA (Resposta): Recebe o Model do DataSource e retorna como Entity para o Domain.
+ * COMO USAR: Implementação do repositório, injetar no container de DI.
  */
+
+import 'package:{{project_name.snakeCase()}}/src/core/utils/result/result.dart';
+import 'package:{{project_name.snakeCase()}}/src/features/example/data/failures/example_failures.dart';
 
 import '../../domain/entities/example_entity.dart';
 import '../../domain/repositories/example_repository.dart';
 import '../datasources/example_datasource.dart';
 
 class ExampleRepositoryImpl implements ExampleRepository {
-  final ExampleDataSource dataSource;
+  ExampleRepositoryImpl(this._exampleDatasource);
 
-  ExampleRepositoryImpl(this.dataSource);
+  final ExampleDataSource _exampleDatasource;
 
   @override
-  Future<ExampleEntity> getExample(String id) async {
-    return await dataSource.getExample(id);
+  Future<Result<ExampleFailure, ExampleEntity>> getExample() async {
+    final result = await _exampleDatasource.getExample();
+
+    return result.fold(
+      (error) => Failure(error),
+      (example) => Success(example.toEntity()),
+    );
   }
 }
+

@@ -1,9 +1,7 @@
-/*
+﻿/*
  * ARQUIVO: lib/src/features/example/presentation/example_view.dart
  * RESPONSABILIDADE: Interface do usuário (UI) para exibir a entidade Example.
- * CAMINHO DOS DADOS EM U:
- * - IDA (Pedido): O usuário interage e dispara ações no Cubit (ex: fetchExample).
- * - VOLTA (Resposta): A View escuta os estados do Cubit e se reconstrói conforme necessário.
+ * COMO USAR: Instanciar e exibir como parte da navegação ou árvore de widgets.
  */
 
 import 'package:flutter/material.dart';
@@ -29,7 +27,7 @@ class ExampleView extends StatelessWidget {
               return Text('Erro: ${state.message}');
             }
             return ElevatedButton(
-              onPressed: () => context.read<ExampleCubit>().fetchExample('123'),
+              onPressed: () => context.read<ExampleCubit>().fetchExample(),
               child: const Text('Buscar Exemplo'),
             );
           },
@@ -38,3 +36,4 @@ class ExampleView extends StatelessWidget {
     );
   }
 }
+

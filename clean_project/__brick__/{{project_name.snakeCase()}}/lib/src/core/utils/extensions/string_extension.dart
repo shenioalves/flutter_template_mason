@@ -1,3 +1,8 @@
+﻿/*
+ * ARQUIVO: lib/src/core/utils/extensions/string_extension.dart
+ * RESPONSABILIDADE: Utilitários e extensões auxiliares
+ * COMO USAR: Extensões de conveniência para tipos nativos.
+ */
 import 'package:{{project_name.snakeCase()}}/src/core/utils/misc.dart';
 
 extension StringExtension on String {
@@ -51,7 +56,7 @@ extension StringExtension on String {
   ///Replace all letters with accents for the same ones without
   String get removeAccentInWord {
     String text = this;
-    text = text.replaceAllMapped(RegExp(r'[áàâãäéèêëíìîïóòôõöúùûüçÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇ]'), (match) {
+    text = text.replaceAllMapped(RegExp(r'[áàĂ˘ãĂ¤Ă©Ă¨êĂ«íĂ¬Ă®ĂŻóĂ˛Ă´õĂ¶úĂąĂ»ĂĽçĂĂ€ÂĂĂ„ÉĂĂŠĂ‹ĂŤĂŚĂŽĂŹĂ“Ă’Ă”Ă•Ă–ĂšĂ™Ă›ĂśĂ‡]'), (match) {
       return mapAccents[match.group(0)]!;
     });
 
@@ -65,3 +70,4 @@ extension StringNullExtensions on String? {
     return this?.isNotEmpty ?? false;
   }
 }
+

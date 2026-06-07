@@ -1,3 +1,9 @@
+﻿/*
+ * ARQUIVO: lib/src/features/{{feature_name.snakeCase()}}/presentation/cubit/{{feature_name.snakeCase()}}_state.dart
+ * RESPONSABILIDADE: Definir os estados possíveis da tela.
+ * COMO USAR: Consumir no BlocBuilder para reagir a mudanças de estado.
+ */
+
 import 'package:equatable/equatable.dart';
 import '../../domain/entities/{{feature_name.snakeCase()}}_entity.dart';
 
@@ -28,3 +34,4 @@ class {{feature_name.pascalCase()}}Error extends {{feature_name.pascalCase()}}St
   @override
   List<Object?> get props => [message];
 }
+

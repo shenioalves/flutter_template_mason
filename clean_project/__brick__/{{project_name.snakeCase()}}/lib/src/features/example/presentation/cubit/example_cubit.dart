@@ -1,9 +1,7 @@
-/*
+﻿/*
  * ARQUIVO: lib/src/features/example/presentation/cubit/example_cubit.dart
  * RESPONSABILIDADE: Gerenciar o estado da tela e coordenar a execução de UseCases.
- * CAMINHO DOS DADOS EM U:
- * - IDA (Pedido): Recebe eventos da View e chama o UseCase.
- * - VOLTA (Resposta): Converte o resultado do UseCase em um estado (Success/Error) para a View.
+ * COMO USAR: Injetar via BlocProvider e acessar via context.read().
  */
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,13 +13,15 @@ class ExampleCubit extends Cubit<ExampleState> {
 
   ExampleCubit(this.getExampleUseCase) : super(ExampleInitial());
 
-  Future<void> fetchExample(String id) async {
+  Future<void> fetchExample() async {
     emit(ExampleLoading());
-    try {
-      final result = await getExampleUseCase(id);
-      emit(ExampleSuccess(result));
-    } catch (e) {
-      emit(ExampleError(e.toString()));
-    }
+
+    final result = await getExampleUseCase();
+
+    result.fold(
+      (failure) => emit(ExampleError(failure.message ?? failure.type.name)),
+      (entity) => emit(ExampleSuccess(entity)),
+    );
   }
 }
+

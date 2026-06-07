@@ -1,13 +1,15 @@
-/*
+﻿/*
  * ARQUIVO: lib/src/features/example/example_module.dart
  * RESPONSABILIDADE: Encapsular a configuração de DI e Rotas da feature Example.
- * PADRÃO: Module Pattern. Isola a feature do resto do app.
+ * COMO USAR: Module Pattern. Isola a feature do resto do app.
  */
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+
 import '../../core/di/injector.dart';
 import '../../core/modules/feature_module.dart';
+import '../../core/network/api_client.dart';
 import '../../core/routes/route_service.dart';
 import 'data/datasources/example_datasource.dart';
 import 'data/datasources/example_remote_datasource_impl.dart';
@@ -22,7 +24,7 @@ class ExampleModule implements FeatureModule {
   void registerDependencies(Injector injector) {
     // DataSources
     injector.registerLazySingleton<ExampleDataSource>(
-      () => ExampleRemoteDataSourceImpl(),
+      () => ExampleRemoteDataSourceImpl(injector.get<ApiClient>()),
     );
 
     // Repositories
@@ -35,7 +37,7 @@ class ExampleModule implements FeatureModule {
       () => GetExampleUseCase(injector.get<ExampleRepository>()),
     );
 
-    // Cubit (Registrado como Factory para novas instâncias ao entrar na tela)
+    // Cubit (Registrado como Factory para novas instĂ˘ncias ao entrar na tela)
     injector.registerFactory<ExampleCubit>(
       () => ExampleCubit(injector.get<GetExampleUseCase>()),
     );
@@ -46,21 +48,24 @@ class ExampleModule implements FeatureModule {
     return [
       GoRoute(
         path: '/',
-        pageBuilder: (context, state) => RouteService.buildPageTransitionDefault(
-          context: context,
-          state: state,
-          child: BlocProvider(
-            create: (context) => ExampleModule.getInjector(context).get<ExampleCubit>(),
-            child: const ExampleView(),
-          ),
-        ),
+        pageBuilder: (context, state) =>
+            RouteService.buildPageTransitionDefault(
+              context: context,
+              state: state,
+              child: BlocProvider(
+                create: (context) =>
+                    ExampleModule.getInjector(context).get<ExampleCubit>(),
+                child: const ExampleView(),
+              ),
+            ),
       ),
     ];
   }
 
-  /// Helper para recuperar o injector a partir do context se necessário, 
+  /// Helper para recuperar o injector a partir do context se necessário,
   /// ou via DI central. Aqui assumimos uso do Injector registrado no core.
   // ignore: strict_top_level_inference
-  static Injector getInjector(context) => 
+  static Injector getInjector(context) =>
       RepositoryProvider.of<Injector>(context);
 }
+

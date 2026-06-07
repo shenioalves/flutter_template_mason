@@ -1,3 +1,8 @@
+/*
+ * ARQUIVO: test\widget_test.dart
+ * RESPONSABILIDADE: Indefinida
+ * COMO USAR: Consultar documentação
+ */
 import 'package:flutter/material.dart';
 import 'package:{{project_name.snakeCase()}}/src/my_app.dart';
 import 'package:flutter_test/flutter_test.dart';

@@ -1,8 +1,7 @@
-/*
+﻿/*
  * ARQUIVO: lib/src/features/example/presentation/cubit/example_state.dart
  * RESPONSABILIDADE: Definir os estados possíveis da tela.
- * CAMINHO DOS DADOS EM U:
- * - VOLTA (Resposta): O Cubit emite um destes estados para atualizar a View.
+ * COMO USAR: Consumir no BlocBuilder para reagir a mudanças de estado.
  */
 
 import 'package:equatable/equatable.dart';
@@ -36,3 +35,4 @@ class ExampleError extends ExampleState {
   @override
   List<Object?> get props => [message];
 }
+

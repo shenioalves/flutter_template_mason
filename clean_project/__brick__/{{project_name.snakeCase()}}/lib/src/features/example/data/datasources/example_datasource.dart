@@ -1,13 +1,14 @@
-/*
+﻿/*
  * ARQUIVO: lib/src/features/example/data/datasources/example_datasource.dart
  * RESPONSABILIDADE: Definir o contrato para a fonte de dados (API, Local DB, etc).
- * CAMINHO DOS DADOS EM U:
- * - IDA (Pedido): Chamado pelo RepositoryImpl.
- * - VOLTA (Resposta): Retorna dados brutos ou Models.
+ * COMO USAR: Interface para fonte de dados, injetar no Repositório.
  */
 
-import '../models/example_model.dart';
+import 'package:{{project_name.snakeCase()}}/src/core/utils/result/result.dart';
+import 'package:{{project_name.snakeCase()}}/src/features/example/data/failures/example_failures.dart';
+import 'package:{{project_name.snakeCase()}}/src/features/example/data/models/example_model.dart';
 
 abstract class ExampleDataSource {
-  Future<ExampleModel> getExample(String id);
+  Future<Result<ExampleFailure, ExampleModel>> getExample();
 }
+

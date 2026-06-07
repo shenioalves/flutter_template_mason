@@ -1,12 +1,14 @@
 /*
  * ARQUIVO: lib/src/features/{{feature_name.snakeCase()}}/{{feature_name.snakeCase()}}_module.dart
+ * RESPONSABILIDADE: Configuração de Injeção de Dependências e Rotas.
+ * COMO USAR: Registrar dependências e definir rotas da feature.
  */
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import '../../../../flutter_boilerplate/bricks/clean_feature/core/di/injector.dart';
-import '../../../../flutter_boilerplate/bricks/clean_feature/core/modules/feature_module.dart';
-import '../../../../flutter_boilerplate/bricks/clean_feature/core/routes/route_service.dart';
+import '../../core/di/injector.dart';
+import '../../core/modules/feature_module.dart';
+import '../../core/routes/route_service.dart';
 import 'data/datasources/{{feature_name.snakeCase()}}_datasource.dart';
 import 'data/datasources/{{feature_name.snakeCase()}}_remote_datasource_impl.dart';
 import 'data/repositories/{{feature_name.snakeCase()}}_repository_impl.dart';
@@ -58,3 +60,4 @@ class {{feature_name.pascalCase()}}Module implements FeatureModule {
 
   static Injector getInjector(context) => RepositoryProvider.of<Injector>(context);
 }
+

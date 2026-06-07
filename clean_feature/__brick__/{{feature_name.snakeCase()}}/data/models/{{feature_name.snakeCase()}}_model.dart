@@ -1,3 +1,9 @@
+﻿/*
+ * ARQUIVO: lib/src/features/{{feature_name.snakeCase()}}/data/models/{{feature_name.snakeCase()}}_model.dart
+ * RESPONSABILIDADE: Representação de dados externa (JSON).
+ * COMO USAR: Modelo de dados para serialização/deserialização (JSON).
+ */
+
 import '../../domain/entities/{{feature_name.snakeCase()}}_entity.dart';
 
 class {{feature_name.pascalCase()}}Model extends {{feature_name.pascalCase()}}Entity {
@@ -20,3 +26,4 @@ class {{feature_name.pascalCase()}}Model extends {{feature_name.pascalCase()}}En
     };
   }
 }
+
