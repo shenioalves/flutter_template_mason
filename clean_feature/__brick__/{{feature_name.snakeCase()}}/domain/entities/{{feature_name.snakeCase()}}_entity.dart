@@ -1,21 +1,14 @@
-﻿/*
+/*
  * ARQUIVO: lib/src/features/{{feature_name.snakeCase()}}/domain/entities/{{feature_name.snakeCase()}}_entity.dart
- * RESPONSABILIDADE: Objeto de domínio que representa o negócio.
- * COMO USAR: Entidade de domínio, usada na camada de negócio e UI.
+ * RESPONSABILIDADE: Representar as regras de negócio e propriedades da entidade principal da feature.
+ * COMO USAR: Retornado pelo Repository/UseCase. Não deve conter anotações JSON, apenas regras puras do Dart.
  */
 
-import 'package:equatable/equatable.dart';
-
-class {{feature_name.pascalCase()}}Entity extends Equatable {
+class {{feature_name.pascalCase()}}Entity {
   final String id;
-  final String name;
-
-  const {{feature_name.pascalCase()}}Entity({
+  
+  // Adicione outras propriedades da entidade
+  {{feature_name.pascalCase()}}Entity({
     required this.id,
-    required this.name,
   });
-
-  @override
-  List<Object?> get props => [id, name];
 }
-
