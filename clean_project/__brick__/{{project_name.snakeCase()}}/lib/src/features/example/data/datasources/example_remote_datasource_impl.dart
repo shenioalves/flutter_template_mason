@@ -1,28 +1,20 @@
-﻿/*
- * ARQUIVO: lib/src/features/example/data/datasources/example_remote_datasource_impl.dart
- * RESPONSABILIDADE: Implementar a chamada para a fonte de dados remota (ex: API).
- * COMO USAR: Implementação de fonte de dados remota via API.
- */
-
-import 'package:{{project_name.snakeCase()}}/src/core/network/api_client.dart';
-import 'package:{{project_name.snakeCase()}}/src/core/utils/result/result.dart';
-import 'package:{{project_name.snakeCase()}}/src/features/example/data/failures/example_failures.dart';
-
+import '../../../../core/network/api_client.dart';
 import '../models/example_model.dart';
 import 'example_datasource.dart';
 
 class ExampleRemoteDataSourceImpl implements ExampleDataSource {
-  ExampleRemoteDataSourceImpl(this._httpClient);
-  final ApiClient _httpClient;
+  ExampleRemoteDataSourceImpl({required ApiClient apiClient})
+    : _apiClient = apiClient;
+
+  final ApiClient _apiClient;
 
   @override
-  Future<Result<ExampleFailure, ExampleModel>> getExample() async {
-    try {
-      final result = await _httpClient.get('/example');
-      return Success(ExampleModel.fromJson(result.data));
-    } catch (e) {
-      return const Failure(FailureInfo(type: ExampleFailure.unkown));
+  Future<ExampleModel> getExample() async {
+    final response = await _apiClient.get('/example');
+    final data = response.data;
+    if (data is! Map<String, dynamic>) {
+      throw const FormatException('Invalid example response.');
     }
+    return ExampleModel.fromJson(data);
   }
 }
-

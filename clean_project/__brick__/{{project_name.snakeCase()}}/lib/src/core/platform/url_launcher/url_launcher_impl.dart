@@ -6,7 +6,6 @@
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart' as url_launcher;
 import 'package:{{project_name.snakeCase()}}/src/core/platform/url_launcher/url_launcher.dart';
 

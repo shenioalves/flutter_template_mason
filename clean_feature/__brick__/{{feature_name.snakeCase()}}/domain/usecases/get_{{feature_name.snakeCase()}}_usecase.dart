@@ -1,19 +1,14 @@
-﻿/*
- * ARQUIVO: lib/src/features/{{feature_name.snakeCase()}}/domain/usecases/get_{{feature_name.snakeCase()}}_usecase.dart
- * RESPONSABILIDADE: Executar uma regra de negócio específica.
- * COMO USAR: Injetar no Cubit e chamar para executar regra de negócio.
- */
-
+import '../../../../core/utils/result/result.dart';
 import '../entities/{{feature_name.snakeCase()}}_entity.dart';
+import '../failures/{{feature_name.snakeCase()}}_failure.dart';
 import '../repositories/{{feature_name.snakeCase()}}_repository.dart';
 
 class Get{{feature_name.pascalCase()}}UseCase {
-  final {{feature_name.pascalCase()}}Repository repository;
+  const Get{{feature_name.pascalCase()}}UseCase(this._repository);
 
-  Get{{feature_name.pascalCase()}}UseCase(this.repository);
+  final {{feature_name.pascalCase()}}Repository _repository;
 
-  Future<{{feature_name.pascalCase()}}Entity> call(String id) async {
-    return await repository.get{{feature_name.pascalCase()}}(id);
+  Future<Result<{{feature_name.pascalCase()}}Failure, {{feature_name.pascalCase()}}Entity>> call() {
+    return _repository.get{{feature_name.pascalCase()}}();
   }
 }
-

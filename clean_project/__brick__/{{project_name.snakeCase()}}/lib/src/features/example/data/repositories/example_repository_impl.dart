@@ -1,29 +1,58 @@
-﻿/*
- * ARQUIVO: lib/src/features/example/data/repositories/example_repository_impl.dart
- * RESPONSABILIDADE: Implementar a interface do domínio, coordenando as fontes de dados.
- * COMO USAR: Implementação do repositório, injetar no container de DI.
- */
-
-import 'package:{{project_name.snakeCase()}}/src/core/utils/result/result.dart';
-import 'package:{{project_name.snakeCase()}}/src/features/example/data/failures/example_failures.dart';
-
+import '../../../../core/network/api_client_exception.dart';
+import '../../../../core/utils/result/result.dart';
 import '../../domain/entities/example_entity.dart';
+import '../../domain/failures/example_failure.dart';
 import '../../domain/repositories/example_repository.dart';
 import '../datasources/example_datasource.dart';
 
 class ExampleRepositoryImpl implements ExampleRepository {
-  ExampleRepositoryImpl(this._exampleDatasource);
+  ExampleRepositoryImpl(this._dataSource);
 
-  final ExampleDataSource _exampleDatasource;
+  final ExampleDataSource _dataSource;
 
   @override
   Future<Result<ExampleFailure, ExampleEntity>> getExample() async {
-    final result = await _exampleDatasource.getExample();
+    try {
+      final model = await _dataSource.getExample();
+      return Success<ExampleFailure, ExampleEntity>(model.toEntity());
+    } on ApiClientException catch (error) {
+      return Failure<ExampleFailure, ExampleEntity>(
+        FailureInfo(type: _mapException(error), message: _messageFrom(error)),
+      );
+    } on FormatException catch (error) {
+      return Failure<ExampleFailure, ExampleEntity>(
+        FailureInfo(
+          type: ExampleFailure.invalidResponse,
+          message: error.message,
+        ),
+      );
+    } catch (error) {
+      return Failure<ExampleFailure, ExampleEntity>(
+        FailureInfo(type: ExampleFailure.unknown, message: error.toString()),
+      );
+    }
+  }
 
-    return result.fold(
-      (error) => Failure(error),
-      (example) => Success(example.toEntity()),
-    );
+  ExampleFailure _mapException(ApiClientException error) {
+    if (error.kind == ApiClientErrorKind.noConnection) {
+      return ExampleFailure.noConnection;
+    }
+    if (error.kind == ApiClientErrorKind.timeout) {
+      return ExampleFailure.timeout;
+    }
+    final statusCode = error.statusCode;
+    if (statusCode != null && statusCode >= 500 && statusCode <= 599) {
+      return ExampleFailure.serverError;
+    }
+    return ExampleFailure.unknown;
+  }
+
+  String _messageFrom(ApiClientException error) {
+    final data = error.responseData;
+    if (data is Map<String, dynamic>) {
+      final message = data['message'] ?? data['error'];
+      if (message is String && message.isNotEmpty) return message;
+    }
+    return error.message ?? 'Unable to load the example.';
   }
 }
-

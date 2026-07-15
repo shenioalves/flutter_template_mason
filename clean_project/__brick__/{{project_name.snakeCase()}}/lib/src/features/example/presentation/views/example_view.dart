@@ -1,36 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:{{project_name.snakeCase()}}/src/core/ui/ui.dart';
 
-import '../../../../core/ui/ui.dart';
-import '../cubit/{{feature_name.snakeCase()}}_cubit.dart';
-import '../cubit/{{feature_name.snakeCase()}}_state.dart';
+import '../cubit/example_cubit.dart';
+import '../cubit/example_state.dart';
 
-class {{feature_name.pascalCase()}}View extends StatelessWidget {
-  const {{feature_name.pascalCase()}}View({super.key});
+class ExampleView extends StatelessWidget {
+  const ExampleView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<{{feature_name.pascalCase()}}Cubit, {{feature_name.pascalCase()}}State>(
+    return BlocBuilder<ExampleCubit, ExampleState>(
       builder: (context, state) {
         return AppTemplateView(
           state: state.viewState,
           backgroundColor: AppColors.background,
-          refreshPageError:
-              context.read<{{feature_name.pascalCase()}}Cubit>().fetch{{feature_name.pascalCase()}},
+          refreshPageError: context.read<ExampleCubit>().fetchExample,
           pageInitial: Center(
             child: AppButton(
-              label: 'Load {{feature_name.titleCase()}}',
-              onPressed:
-                  context.read<{{feature_name.pascalCase()}}Cubit>().fetch{{feature_name.pascalCase()}},
+              label: 'Buscar exemplo',
+              onPressed: context.read<ExampleCubit>().fetchExample,
             ),
           ),
           pageSuccess: Center(
-            child: state is {{feature_name.pascalCase()}}Success
+            child: state is ExampleSuccess
                 ? Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       const AppText(
-                        text: '{{feature_name.titleCase()}} loaded',
+                        text: 'Exemplo carregado',
                         typography: AppTypography.heading2,
                       ),
                       const SizedBox(height: 8),

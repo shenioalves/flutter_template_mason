@@ -1,38 +1,49 @@
-﻿/*
- * ARQUIVO: lib/src/features/example/presentation/cubit/example_state.dart
- * RESPONSABILIDADE: Definir os estados possíveis da tela.
- * COMO USAR: Consumir no BlocBuilder para reagir a mudanças de estado.
- */
-
 import 'package:equatable/equatable.dart';
-import '../../domain/entities/example_entity.dart';
 
-abstract class ExampleState extends Equatable {
+import '../../../../core/ui/widgets/views/view_state.dart';
+import '../../../../core/utils/result/result.dart';
+import '../../domain/entities/example_entity.dart';
+import '../../domain/failures/example_failure.dart';
+
+sealed class ExampleState extends Equatable {
   const ExampleState();
+
+  ViewState get viewState => switch (this) {
+    ExampleInitial() => ViewState.initial,
+    ExampleLoading() => ViewState.loading,
+    ExampleSuccess() => ViewState.success,
+    ExampleError(failure: final failure) => switch (failure.type) {
+      ExampleFailure.noConnection => ViewState.errorConnection,
+      _ => ViewState.errorServer,
+    },
+  };
 
   @override
   List<Object?> get props => [];
 }
 
-class ExampleInitial extends ExampleState {}
+final class ExampleInitial extends ExampleState {
+  const ExampleInitial();
+}
 
-class ExampleLoading extends ExampleState {}
+final class ExampleLoading extends ExampleState {
+  const ExampleLoading();
+}
 
-class ExampleSuccess extends ExampleState {
-  final ExampleEntity entity;
-
+final class ExampleSuccess extends ExampleState {
   const ExampleSuccess(this.entity);
+
+  final ExampleEntity entity;
 
   @override
   List<Object?> get props => [entity];
 }
 
-class ExampleError extends ExampleState {
-  final String message;
+final class ExampleError extends ExampleState {
+  const ExampleError(this.failure);
 
-  const ExampleError(this.message);
+  final FailureInfo<ExampleFailure> failure;
 
   @override
-  List<Object?> get props => [message];
+  List<Object?> get props => [failure.type, failure.message];
 }
-

@@ -1,25 +1,20 @@
-/*
- * ARQUIVO: lib/src/features/{{feature_name.snakeCase()}}/data/models/{{feature_name.snakeCase()}}_model.dart
- * RESPONSABILIDADE: Mapear os dados externos (ex: JSON da API) para a entidade do domínio.
- * COMO USAR: Utilizar no DataSource para decodificar a resposta da API e converter para Entity.
- */
-
 import '../../domain/entities/{{feature_name.snakeCase()}}_entity.dart';
 
-class {{feature_name.pascalCase()}}Model extends {{feature_name.pascalCase()}}Entity {
-  {{feature_name.pascalCase()}}Model({
-    required super.id,
-  });
+class {{feature_name.pascalCase()}}Model {
+  const {{feature_name.pascalCase()}}Model({required this.id, required this.name});
+
+  final String id;
+  final String name;
 
   factory {{feature_name.pascalCase()}}Model.fromJson(Map<String, dynamic> json) {
-    return {{feature_name.pascalCase()}}Model(
-      id: json['id'] ?? '',
-    );
+    final id = json['id'];
+    final name = json['name'];
+    if (id is! String || name is! String) {
+      throw const FormatException('{{feature_name.pascalCase()}} fields are invalid.');
+    }
+    return {{feature_name.pascalCase()}}Model(id: id, name: name);
   }
 
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-    };
-  }
+  {{feature_name.pascalCase()}}Entity toEntity() =>
+      {{feature_name.pascalCase()}}Entity(id: id, name: name);
 }

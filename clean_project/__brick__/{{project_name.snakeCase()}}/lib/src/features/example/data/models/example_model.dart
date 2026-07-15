@@ -1,28 +1,19 @@
-﻿/*
- * ARQUIVO: lib/src/features/example/data/models/example_model.dart
- * RESPONSABILIDADE: Realizar a ponte entre os dados brutos (JSON/DB) e a camada de domínio.
- * COMO USAR: Modelo de dados para serialização/deserialização (JSON).
- */
-
-import 'package:freezed_annotation/freezed_annotation.dart';
-
 import '../../domain/entities/example_entity.dart';
 
-part 'example_model.freezed.dart';
-part 'example_model.g.dart';
+class ExampleModel {
+  const ExampleModel({required this.id, required this.name});
 
-@freezed
-abstract class ExampleModel with _$ExampleModel {
-  const ExampleModel._();
+  final String id;
+  final String name;
 
-  const factory ExampleModel({required String id, required String name}) =
-      _ExampleModel;
-
-  factory ExampleModel.fromJson(Map<String, dynamic> json) =>
-      _$ExampleModelFromJson(json);
-
-  ExampleEntity toEntity() {
-    return ExampleEntity(id: id, name: name);
+  factory ExampleModel.fromJson(Map<String, dynamic> json) {
+    final id = json['id'];
+    final name = json['name'];
+    if (id is! String || name is! String) {
+      throw const FormatException('Example fields are invalid.');
+    }
+    return ExampleModel(id: id, name: name);
   }
-}
 
+  ExampleEntity toEntity() => ExampleEntity(id: id, name: name);
+}
