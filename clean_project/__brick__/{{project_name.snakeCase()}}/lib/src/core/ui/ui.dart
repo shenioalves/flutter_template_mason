@@ -1,11 +1,21 @@
-﻿/*
- * ARQUIVO: lib/src/core/ui/ui.dart
- * RESPONSABILIDADE: Indefinida
- * COMO USAR: Exportação de utilitários e componentes de UI.
- */
 export 'theme/app_colors.dart';
+export 'theme/app_shadows.dart';
 export 'theme/app_theme.dart';
 export 'theme/app_typography.dart';
+export 'utils/app_assets.dart';
+export 'utils/responsive_utils.dart';
+export 'widgets/app_asset.dart';
 export 'widgets/app_button.dart';
+export 'widgets/app_card.dart';
+export 'widgets/app_dialog.dart';
+export 'widgets/app_icon.dart';
+export 'widgets/app_loading.dart';
+export 'widgets/app_text.dart';
+export 'widgets/app_rich_text.dart';
+export 'widgets/app_text_span.dart';
 export 'widgets/app_text_form_field.dart';
-
+export 'widgets/app_step_header.dart';
+export 'widgets/app_requirement_item.dart';
+export 'widgets/app_snackbar.dart';
+export 'widgets/views/app_template_view.dart';
+export 'widgets/views/view_state.dart';

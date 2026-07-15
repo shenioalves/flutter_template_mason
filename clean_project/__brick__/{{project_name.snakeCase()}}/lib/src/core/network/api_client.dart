@@ -1,10 +1,9 @@
-﻿/*
- * ARQUIVO: lib/src/core/network/api_client.dart
- * RESPONSABILIDADE: Camada de rede e comunicação externa
- * COMO USAR: Interface para requisições HTTP.
- */
-import 'package:{{project_name.snakeCase()}}/src/core/network/api_response.dart';
+import 'api_response.dart';
 
+/// Contrato abstrato para o cliente HTTP do aplicativo.
+///
+/// Desacopla toda a base de código da implementação concreta (Dio),
+/// permitindo substituição em testes ou mudança de biblioteca sem impacto.
 abstract class ApiClient {
   Future<ApiResponse> get(
     String url, {
@@ -34,5 +33,6 @@ abstract class ApiClient {
   });
 
   Future<ApiResponse> delete(String url, {Map<String, dynamic>? headers});
+
   Future<void> download(String url, String path);
 }

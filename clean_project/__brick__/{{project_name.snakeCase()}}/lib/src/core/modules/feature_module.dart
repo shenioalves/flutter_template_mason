@@ -1,7 +1,7 @@
-﻿/*
+/*
  * ARQUIVO: lib/src/core/modules/feature_module.dart
  * RESPONSABILIDADE: Definir o contrato obrigatório para cada feature do sistema.
- * COMO USAR: Interface Segregation. Cada módulo decide suas dependências e rotas.
+ * PADRÃO: Interface Segregation. Cada módulo decide suas dependências e rotas.
  */
 
 import 'package:go_router/go_router.dart';

@@ -1,11 +1,11 @@
-﻿/*
- * ARQUIVO: lib/src/core/di/injector_impl.dart
- * RESPONSABILIDADE: Gerenciamento de Injeção de Dependências
- * COMO USAR: Implementação concreta do Injector usando GetIt.
- */
-import 'package:{{project_name.snakeCase()}}/src/core/di/injector.dart';
 import 'package:get_it/get_it.dart';
 
+import 'injector.dart';
+
+/// Implementação concreta do [Injector] usando GetIt.
+///
+/// Este é o único ficheiro do projeto que conhece o GetIt diretamente.
+/// Toda a restante base de código depende apenas da interface [Injector].
 class InjectorImpl implements Injector {
   final _getIt = GetIt.instance;
 
@@ -24,4 +24,3 @@ class InjectorImpl implements Injector {
   void registerFactory<T extends Object>(T Function() instanceFunc) =>
       _getIt.registerFactory<T>(instanceFunc);
 }
-

@@ -1,12 +1,8 @@
-﻿/*
- * ARQUIVO: lib/src/core/storage/local_storage/local_storage_impl.dart
- * RESPONSABILIDADE: Persistência de dados local
- * COMO USAR: Implementação de persistência de dados.
- */
- 
-import 'package:{{project_name.snakeCase()}}/src/core/storage/local_storage/local_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'local_storage.dart';
+
+/// Implementação de [LocalStorage] usando SharedPreferences.
 class LocalStorageImpl implements LocalStorage {
   LocalStorageImpl(this._preferences);
 
@@ -22,4 +18,3 @@ class LocalStorageImpl implements LocalStorage {
   @override
   Future<bool> remove(String key) async => _preferences.remove(key);
 }
-

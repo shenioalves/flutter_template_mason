@@ -1,82 +1,70 @@
-/*
- * ARQUIVO: lib/src/core/routes/route_service.dart
- * RESPONSABILIDADE: Orquestrar a navegação do aplicativo, centralizando rotas de múltiplos módulos.
- * COMO USAR: Service / Orchestrator. Isola a complexidade do GoRouter.
- */
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../di/injector.dart';
 import '../modules/feature_module.dart';
 import '../ui/ui.dart';
+import 'app_routes.dart';
 
 class RouteService {
-  late final GoRouter _router;
-  final List<FeatureModule> _modules;
-
   RouteService(this._modules);
+
+  final List<FeatureModule> _modules;
+  late final GoRouter _router;
 
   GoRouter get router => _router;
 
-  /// Inicializa o sistema de rotas e registra dependências de todos os módulos.
   void initialize(Injector injector) {
-    final List<RouteBase> allRoutes = [];
+    final routes = <RouteBase>[];
 
     for (final module in _modules) {
-      // 1. Cada módulo registra o que precisa no Injector recebido
       module.registerDependencies(injector);
-
-      // 2. Coleta as rotas do módulo
-      allRoutes.addAll(module.routes());
+      routes.addAll(module.routes());
     }
 
     _router = GoRouter(
-      debugLogDiagnostics: true,
-      initialLocation: '/splash',
-      routes: allRoutes,
+      initialLocation: AppRoutes.splashPath,
+      routes: routes,
       errorBuilder: (context, state) => Scaffold(
-        backgroundColor: AppColors.white,
         body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Icon(
-                Icons.error_outline,
-                color: AppColors.red500,
-                size: 80,
-              ),
-              const SizedBox(height: 16),
-              Text(
-                'Ops! Algo deu errado',
-                style: AppTypography.bodyLarge.copyWith(
-                  color: AppColors.gray900,
+          child: Padding(
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const AppIcon(
+                  icon: Icons.error_outline,
+                  color: AppColors.red_250,
+                  size: 80,
                 ),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                'Rota não encontrada: ${state.uri}',
-                style: AppTypography.bodyLarge.copyWith(
-                  color: AppColors.gray600,
+                const SizedBox(height: 16),
+                const AppText(
+                  text: 'Ops! Algo deu errado',
+                  typography: AppTypography.heading2,
+                  color: AppColors.gray_400,
+                  textAlign: TextAlign.center,
                 ),
-              ),
-              const SizedBox(height: 24),
-              ElevatedButton(
-                onPressed: () => context.go('/splash'),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.blue500,
-                  foregroundColor: AppColors.white,
+                const SizedBox(height: 8),
+                AppText(
+                  text: 'Rota nao encontrada: ${state.uri}',
+                  typography: AppTypography.body,
+                  color: AppColors.gray_250,
+                  textAlign: TextAlign.center,
                 ),
-                child: const Text('Voltar para o Início'),
-              ),
-            ],
+                const SizedBox(height: 24),
+                AppButton(
+                  label: 'Voltar ao inicio',
+                  onPressed: () => context.goNamed(AppRoutes.splashName),
+                ),
+              ],
+            ),
           ),
         ),
       ),
     );
   }
 
-  static CustomTransitionPage buildPageTransitionDefault<T>({
+  static CustomTransitionPage<T> buildPageTransitionDefault<T>({
     required BuildContext context,
     required GoRouterState state,
     required Widget child,

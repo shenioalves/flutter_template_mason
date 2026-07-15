@@ -1,12 +1,9 @@
-﻿/*
- * ARQUIVO: lib/src/core/storage/secure_storage/secure_storage_impl.dart
- * RESPONSABILIDADE: Persistência de dados local
- * COMO USAR: Implementação de persistência de dados.
- */
-import 'package:{{project_name.snakeCase()}}/src/core/storage/secure_storage/enums/secure_storage_keys.dart';
-import 'package:{{project_name.snakeCase()}}/src/core/storage/secure_storage/secure_storage.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
- 
+
+import 'enums/secure_storage_keys.dart';
+import 'secure_storage.dart';
+
+/// Implementação de [SecureStorage] usando FlutterSecureStorage.
 class SecureStorageImpl implements SecureStorage {
   SecureStorageImpl(this._secureStorage);
 
@@ -25,5 +22,18 @@ class SecureStorageImpl implements SecureStorage {
   @override
   Future<void> deleteSessionToken() =>
       _secureStorage.delete(key: SecureStorageKey.sessionToken.name);
-}
 
+  @override
+  Future<void> savePasswordResetToken(String token) => _secureStorage.write(
+        value: token,
+        key: SecureStorageKey.passwordResetToken.name,
+      );
+
+  @override
+  Future<String?> getPasswordResetToken() =>
+      _secureStorage.read(key: SecureStorageKey.passwordResetToken.name);
+
+  @override
+  Future<void> deletePasswordResetToken() =>
+      _secureStorage.delete(key: SecureStorageKey.passwordResetToken.name);
+}

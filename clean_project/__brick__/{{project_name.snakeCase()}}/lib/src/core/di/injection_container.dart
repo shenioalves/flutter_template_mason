@@ -6,6 +6,7 @@
 
 import '../../features/example/example_module.dart';
 import '../../features/splash/splash_module.dart';
+import '../logger/di/logger_dependencies.dart';
 import '../network/di/network_dependencies.dart';
 import '../platform/di/platform_dependencies.dart';
 import '../routes/route_service.dart';
@@ -22,8 +23,9 @@ class InjectionContainer {
 
     // 2. Registra Serviços Base (Network, Storage, Plataforma, etc)
     // Ex: injector.registerLazySingleton<HttpClient>(() => DioClientImpl());
-    configureNetworkDependencies(injector);
+    configureLoggerDependencies(injector);
     await configureStorageDependencies(injector);
+    configureNetworkDependencies(injector);
     configurePlatformDependencies(injector);
 
     // 3. Configura o RouteService com a lista de módulos

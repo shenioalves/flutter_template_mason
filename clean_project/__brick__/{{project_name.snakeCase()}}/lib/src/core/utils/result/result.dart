@@ -1,8 +1,14 @@
-﻿/*
- * ARQUIVO: lib/src/core/utils/result/result.dart
- * RESPONSABILIDADE: Utilitários e extensões auxiliares
- * COMO USAR: Wrapper para retorno de sucesso ou falha (Either pattern).
- */
+/// Tipo selado (sealed class) para representar o resultado de operações
+/// que podem falhar de forma tipada.
+///
+/// Uso:
+/// ```dart
+/// final result = await repository.getData();
+/// result.fold(
+///   (failure) => print('Erro: ${failure.message}'),
+///   (data) => print('Sucesso: $data'),
+/// );
+/// ```
 sealed class Result<T extends FailureType, S> {
   const Result();
 
@@ -24,13 +30,16 @@ final class Success<T extends FailureType, S> extends Result<T, S> {
 }
 
 final class Failure<T extends FailureType, S> extends Result<T, S> {
-  const Failure(this.error);
+  const Failure(this.error, {Object? message});
 
   final FailureInfo<T> error;
 }
 
+/// Marcador para tipos de falha. Cada feature cria o seu próprio enum
+/// que implementa [FailureType].
 abstract class FailureType {}
 
+/// Container de informação sobre a falha ocorrida.
 class FailureInfo<T extends FailureType> {
   const FailureInfo({
     required this.type,
@@ -40,4 +49,3 @@ class FailureInfo<T extends FailureType> {
   final T type;
   final String? message;
 }
-

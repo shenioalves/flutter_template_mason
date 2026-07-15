@@ -1,7 +1,5 @@
-﻿/*
- * ARQUIVO: lib/src/core/storage/secure_storage/enums/secure_storage_keys.dart
- * RESPONSABILIDADE: Persistência de dados local
- * COMO USAR: Definição de chaves para armazenamento local.
- */
-enum SecureStorageKey { sessionToken }
-
+/// Chaves tipadas para o armazenamento seguro.
+///
+/// Tokens de sessão e tokens de redefinição têm finalidades e ciclos de vida
+/// distintos. Eles nunca devem compartilhar a mesma chave.
+enum SecureStorageKey { sessionToken, passwordResetToken }

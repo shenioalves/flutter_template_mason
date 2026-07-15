@@ -1,8 +1,7 @@
-﻿/*
- * ARQUIVO: lib/src/core/di/injector.dart
- * RESPONSABILIDADE: Gerenciamento de Injeção de Dependências
- * COMO USAR: Interface para o container de injeção de dependências.
- */
+/// Contrato abstrato para o Service Locator do app.
+///
+/// Desacopla o código de negócios da implementação concreta (GetIt),
+/// permitindo substituição em testes ou mudança de biblioteca sem impacto.
 abstract class Injector {
   T get<T extends Object>();
   void registerSingleton<T extends Object>(T instance);

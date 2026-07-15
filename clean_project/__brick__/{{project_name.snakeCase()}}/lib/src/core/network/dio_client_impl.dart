@@ -1,12 +1,8 @@
-﻿/*
- * ARQUIVO: lib/src/core/network/dio_client_impl.dart
- * RESPONSABILIDADE: Camada de rede e comunicação externa
- * COMO USAR: Implementação do ApiClient usando a biblioteca Dio.
- */
 import 'package:dio/dio.dart';
-import 'package:{{project_name.snakeCase()}}/src/core/network/api_client.dart';
-import 'package:{{project_name.snakeCase()}}/src/core/network/api_client_exception.dart';
-import 'package:{{project_name.snakeCase()}}/src/core/network/api_response.dart';
+
+import 'api_client.dart';
+import 'api_client_exception.dart';
+import 'api_response.dart';
 
 class DioClientImpl implements ApiClient {
   DioClientImpl(this._dio);
@@ -30,10 +26,7 @@ class DioClientImpl implements ApiClient {
         statusCode: response.statusCode ?? 0,
       );
     } on DioException catch (e) {
-      throw ApiClientException(
-        statusCode: e.response?.statusCode,
-        message: e.message,
-      );
+      throw _toApiClientException(e);
     }
   }
 
@@ -56,10 +49,7 @@ class DioClientImpl implements ApiClient {
         statusCode: response.statusCode ?? 0,
       );
     } on DioException catch (e) {
-      throw ApiClientException(
-        statusCode: e.response?.statusCode,
-        message: e.message,
-      );
+      throw _toApiClientException(e);
     }
   }
 
@@ -82,10 +72,7 @@ class DioClientImpl implements ApiClient {
         statusCode: response.statusCode ?? 0,
       );
     } on DioException catch (e) {
-      throw ApiClientException(
-        statusCode: e.response?.statusCode,
-        message: e.message,
-      );
+      throw _toApiClientException(e);
     }
   }
 
@@ -108,10 +95,7 @@ class DioClientImpl implements ApiClient {
         statusCode: response.statusCode ?? 0,
       );
     } on DioException catch (e) {
-      throw ApiClientException(
-        statusCode: e.response?.statusCode,
-        message: e.message,
-      );
+      throw _toApiClientException(e);
     }
   }
 
@@ -130,10 +114,7 @@ class DioClientImpl implements ApiClient {
         statusCode: response.statusCode ?? 0,
       );
     } on DioException catch (e) {
-      throw ApiClientException(
-        statusCode: e.response?.statusCode,
-        message: e.message,
-      );
+      throw _toApiClientException(e);
     }
   }
 
@@ -142,10 +123,25 @@ class DioClientImpl implements ApiClient {
     try {
       await _dio.download(url, path);
     } on DioException catch (e) {
-      throw ApiClientException(
-        statusCode: e.response?.statusCode,
-        message: e.message,
-      );
+      throw _toApiClientException(e);
     }
+  }
+
+  ApiClientException _toApiClientException(DioException exception) {
+    final kind = switch (exception.type) {
+      DioExceptionType.connectionTimeout ||
+      DioExceptionType.sendTimeout ||
+      DioExceptionType.receiveTimeout => ApiClientErrorKind.timeout,
+      DioExceptionType.connectionError => ApiClientErrorKind.noConnection,
+      DioExceptionType.badResponse => ApiClientErrorKind.http,
+      _ => ApiClientErrorKind.unexpected,
+    };
+
+    return ApiClientException(
+      kind: kind,
+      statusCode: exception.response?.statusCode,
+      message: exception.message,
+      responseData: exception.response?.data,
+    );
   }
 }

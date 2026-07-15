@@ -1,16 +1,27 @@
-﻿/*
- * ARQUIVO: lib/src/core/network/api_client_exception.dart
- * RESPONSABILIDADE: Camada de rede e comunicação externa
- * COMO USAR: Exceção customizada para erros de comunicação com a API.
- */
+/// Categoria técnica preservada entre o cliente HTTP e o repositório.
+///
+/// A camada de dados converte esta categoria em failures de domínio. Ela não
+/// deve vazar para Presentation.
+enum ApiClientErrorKind { noConnection, timeout, http, unexpected }
+
+/// Exceção independente do Dio para erros de infraestrutura HTTP.
 class ApiClientException implements Exception {
-  ApiClientException({this.statusCode, this.message});
+  ApiClientException({
+    this.statusCode,
+    this.message,
+    this.responseData,
+    ApiClientErrorKind? kind,
+  }) : kind = kind ??
+            (statusCode == null
+                ? ApiClientErrorKind.unexpected
+                : ApiClientErrorKind.http);
 
   final int? statusCode;
   final String? message;
+  final dynamic responseData;
+  final ApiClientErrorKind kind;
 
   @override
   String toString() =>
-      'ApiClientException(statusCode: $statusCode, message: $message)';
+      'ApiClientException(kind: $kind, statusCode: $statusCode, message: $message, responseData: $responseData)';
 }
-
