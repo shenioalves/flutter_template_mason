@@ -1,27 +1,29 @@
-# 🏛 Documentação de Arquitetura
-Este projeto utiliza Clean Architecture com abordagem Feature-First.
+# Regras da arquitetura
 
-## ⚙️ Como criar uma nova Feature
-Não crie pastas manualmente. Utilize nosso gerador oficial (Mason).
-1. Execute: `mason make clean_feature`
-2. Digite o nome da feature.
-3. Registre o novo módulo gerado dentro de `InjectionContainer.init()`.
+O [README](README.md) é o guia prático. Este arquivo resume as regras para revisão.
 
-## 📂 Estrutura de uma Feature (Fluxo em "U")
-### 1. Domain (Coração)
-* **Entities:** Objetos de negócio puros (sem `.fromJson`).
-* **Repositories:** Interfaces (contratos).
-* **UseCases:** Regras de negócio de responsabilidade única (método `call`).
+- Organize funcionalidades em `features/<nome>` com Domain, Data e Presentation.
+- Domain contém Entity, Failure, contrato de Repository e UseCase. Não importa Flutter, Dio, Data ou Presentation.
+- Model interpreta JSON e converte com `toEntity()`. Não herda Entity.
+- DataSource conhece endpoint e payload. RepositoryImpl converte Model e traduz exceções para `Result<FailureType, Entity>`.
+- Cubit recebe UseCases pelo construtor e emite estados imutáveis. Não recebe BuildContext, não navega e não chama DataSource.
+- Views desenham estado com BlocBuilder e tratam efeitos com BlocListener.
+- Componentes compartilhados recebem dados e callbacks. Regras de uma feature ficam nela.
+- Módulos registram dependências e rotas. InjectionContainer ativa os módulos.
+- Use Injector; GetIt é detalhe interno. Cubits de tela são factories.
+- ApiClient abstrai Dio; erros técnicos não são exibidos diretamente ao usuário.
+- Tokens de sessão e redefinição possuem chaves e ciclos de vida diferentes.
+- `.env` guarda configuração pública, não segredos. Compras são descritas em `docs/ASSINATURAS.md`.
+- Use AppWidgets, tema e AppAssets. Declare os arquivos reais no pubspec.
+- Testes espelham camadas e substituem rede/plugins por mocks ou fakes.
 
-### 2. Data (Infraestrutura)
-* **Models:** Estendem as Entities e lidam com JSON/APIs.
-* **DataSources:** Interfaces e implementações para chamadas externas.
-* **RepositoryImpl:** Implementa o contrato do Domain.
+Fluxo: `View → Cubit → UseCase → Repository → RepositoryImpl → DataSource`.
 
-### 3. Presentation (Interface)
-* **View:** Interface visual passiva.
-* **Cubit/State:** Gerencia os estados da View e coordena UseCases.
+Para criar uma feature, execute na raiz do app:
 
-## 🛑 Regras de Ouro
-* NUNCA importe arquivos da camada Data dentro de Domain ou Presentation.
-* Solicite dependências via construtor e injete pelo Injector.
+```sh
+mason get
+mason make clean_feature --feature_name products -o lib/src/features
+```
+
+Registre o módulo e siga o tutorial do README. Pesquise os comentários `TODO` antes de entregar.
