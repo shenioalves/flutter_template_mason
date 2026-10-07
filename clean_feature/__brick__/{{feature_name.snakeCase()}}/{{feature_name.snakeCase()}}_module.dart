@@ -1,3 +1,4 @@
+// TODO(feature): registre este módulo no InjectionContainer e ajuste as rotas públicas.
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
@@ -22,24 +23,20 @@ class {{feature_name.pascalCase()}}Module implements FeatureModule {
   @override
   void registerDependencies(Injector injector) {
     injector.registerLazySingleton<{{feature_name.pascalCase()}}DataSource>(
-      () => {{feature_name.pascalCase()}}RemoteDataSourceImpl(
-        apiClient: injector.get<ApiClient>(),
-      ),
+      () => {{feature_name.pascalCase()}}RemoteDataSourceImpl(apiClient: injector.get<ApiClient>()),
     );
     injector.registerLazySingleton<{{feature_name.pascalCase()}}Repository>(
       () => {{feature_name.pascalCase()}}RepositoryImpl(
         injector.get<{{feature_name.pascalCase()}}DataSource>(),
+        injector.get<AppLogger>(),
       ),
     );
     injector.registerLazySingleton<Get{{feature_name.pascalCase()}}UseCase>(
-      () => Get{{feature_name.pascalCase()}}UseCase(
-        injector.get<{{feature_name.pascalCase()}}Repository>(),
-      ),
+      () => Get{{feature_name.pascalCase()}}UseCase(injector.get<{{feature_name.pascalCase()}}Repository>()),
     );
     injector.registerFactory<{{feature_name.pascalCase()}}Cubit>(
       () => {{feature_name.pascalCase()}}Cubit(
-        get{{feature_name.pascalCase()}}UseCase:
-            injector.get<Get{{feature_name.pascalCase()}}UseCase>(),
+        get{{feature_name.pascalCase()}}UseCase: injector.get<Get{{feature_name.pascalCase()}}UseCase>(),
         logger: injector.get<AppLogger>(),
       ),
     );
@@ -56,8 +53,7 @@ class {{feature_name.pascalCase()}}Module implements FeatureModule {
               context: context,
               state: state,
               child: BlocProvider(
-                create: (_) => InjectionContainer.injector
-                    .get<{{feature_name.pascalCase()}}Cubit>(),
+                create: (_) => InjectionContainer.injector.get<{{feature_name.pascalCase()}}Cubit>(),
                 child: const {{feature_name.pascalCase()}}View(),
               ),
             ),

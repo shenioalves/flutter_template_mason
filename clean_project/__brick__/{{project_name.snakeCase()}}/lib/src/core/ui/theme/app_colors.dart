@@ -1,3 +1,4 @@
+// TODO(tema): adapte a paleta à identidade visual do novo app.
 import 'package:flutter/material.dart';
 
 class AppColors {

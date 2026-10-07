@@ -1,3 +1,4 @@
+import '../../../../core/logger/app_logger.dart';
 import '../../../../core/network/api_client_exception.dart';
 import '../../../../core/utils/result/result.dart';
 import '../../domain/entities/example_entity.dart';
@@ -6,9 +7,10 @@ import '../../domain/repositories/example_repository.dart';
 import '../datasources/example_datasource.dart';
 
 class ExampleRepositoryImpl implements ExampleRepository {
-  ExampleRepositoryImpl(this._dataSource);
+  ExampleRepositoryImpl(this._dataSource, this._logger);
 
   final ExampleDataSource _dataSource;
+  final AppLogger _logger;
 
   @override
   Future<Result<ExampleFailure, ExampleEntity>> getExample() async {
@@ -16,19 +18,27 @@ class ExampleRepositoryImpl implements ExampleRepository {
       final model = await _dataSource.getExample();
       return Success<ExampleFailure, ExampleEntity>(model.toEntity());
     } on ApiClientException catch (error) {
+      _logger.error(
+        'Falha HTTP: kind=${error.kind}, status=${error.statusCode}',
+      );
       return Failure<ExampleFailure, ExampleEntity>(
         FailureInfo(type: _mapException(error), message: _messageFrom(error)),
       );
-    } on FormatException catch (error) {
+    } on FormatException catch (_) {
+      _logger.error('Resposta da API com formato inválido.');
       return Failure<ExampleFailure, ExampleEntity>(
         FailureInfo(
           type: ExampleFailure.invalidResponse,
-          message: error.message,
+          message: 'Não foi possível interpretar os dados recebidos.',
         ),
       );
-    } catch (error) {
+    } catch (_) {
+      _logger.error('Falha inesperada ao carregar os dados.');
       return Failure<ExampleFailure, ExampleEntity>(
-        FailureInfo(type: ExampleFailure.unknown, message: error.toString()),
+        FailureInfo(
+          type: ExampleFailure.unknown,
+          message: 'Não foi possível carregar os dados. Tente novamente.',
+        ),
       );
     }
   }
@@ -47,12 +57,14 @@ class ExampleRepositoryImpl implements ExampleRepository {
     return ExampleFailure.unknown;
   }
 
+  // TODO(api): trate 401/403 e falhas de negócio conforme o contrato da feature.
   String _messageFrom(ApiClientException error) {
-    final data = error.responseData;
-    if (data is Map<String, dynamic>) {
-      final message = data['message'] ?? data['error'];
-      if (message is String && message.isNotEmpty) return message;
-    }
-    return error.message ?? 'Unable to load the example.';
+    return switch (error.kind) {
+      ApiClientErrorKind.noConnection =>
+        'Verifique sua conexão e tente novamente.',
+      ApiClientErrorKind.timeout =>
+        'A solicitação demorou demais. Tente novamente.',
+      _ => 'Não foi possível carregar os dados. Tente novamente.',
+    };
   }
 }

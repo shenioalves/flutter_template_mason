@@ -1,3 +1,4 @@
+// TODO(api): para integrar o backend, troque ExampleDemoDataSourceImpl pela implementação remota; veja README.
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
@@ -5,11 +6,10 @@ import '../../core/di/injection_container.dart';
 import '../../core/di/injector.dart';
 import '../../core/logger/app_logger.dart';
 import '../../core/modules/feature_module.dart';
-import '../../core/network/api_client.dart';
 import '../../core/routes/app_routes.dart';
 import '../../core/routes/route_service.dart';
 import 'data/datasources/example_datasource.dart';
-import 'data/datasources/example_remote_datasource_impl.dart';
+import 'data/datasources/example_demo_datasource_impl.dart';
 import 'data/repositories/example_repository_impl.dart';
 import 'domain/repositories/example_repository.dart';
 import 'domain/usecases/get_example_usecase.dart';
@@ -20,10 +20,13 @@ class ExampleModule implements FeatureModule {
   @override
   void registerDependencies(Injector injector) {
     injector.registerLazySingleton<ExampleDataSource>(
-      () => ExampleRemoteDataSourceImpl(apiClient: injector.get<ApiClient>()),
+      () => ExampleDemoDataSourceImpl(),
     );
     injector.registerLazySingleton<ExampleRepository>(
-      () => ExampleRepositoryImpl(injector.get<ExampleDataSource>()),
+      () => ExampleRepositoryImpl(
+        injector.get<ExampleDataSource>(),
+        injector.get<AppLogger>(),
+      ),
     );
     injector.registerLazySingleton<GetExampleUseCase>(
       () => GetExampleUseCase(injector.get<ExampleRepository>()),

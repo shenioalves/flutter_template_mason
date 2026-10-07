@@ -32,6 +32,10 @@ migrate_working_dir/
 .pub/
 /build/
 /coverage/
+.env
+.env.*
+!.env.example
+.mason/
 
 # Symbolication related
 app.*.symbols
@@ -43,3 +47,10 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Credenciais de assinatura ficam fora do repositório.
+android/key.properties
+*.jks
+*.keystore
+*.p8
+*.p12

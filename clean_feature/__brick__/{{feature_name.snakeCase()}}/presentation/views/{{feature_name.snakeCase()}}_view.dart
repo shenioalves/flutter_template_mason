@@ -1,3 +1,4 @@
+// TODO(ui): substitua a demonstração pela tela real; trate efeitos únicos com BlocListener.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,13 +16,11 @@ class {{feature_name.pascalCase()}}View extends StatelessWidget {
         return AppTemplateView(
           state: state.viewState,
           backgroundColor: AppColors.background,
-          refreshPageError:
-              context.read<{{feature_name.pascalCase()}}Cubit>().fetch{{feature_name.pascalCase()}},
+          refreshPageError: context.read<{{feature_name.pascalCase()}}Cubit>().fetch{{feature_name.pascalCase()}},
           pageInitial: Center(
             child: AppButton(
-              label: 'Load {{feature_name.titleCase()}}',
-              onPressed:
-                  context.read<{{feature_name.pascalCase()}}Cubit>().fetch{{feature_name.pascalCase()}},
+              label: 'Carregar {{feature_name.titleCase()}}',
+              onPressed: context.read<{{feature_name.pascalCase()}}Cubit>().fetch{{feature_name.pascalCase()}},
             ),
           ),
           pageSuccess: Center(
@@ -30,7 +29,7 @@ class {{feature_name.pascalCase()}}View extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       const AppText(
-                        text: '{{feature_name.titleCase()}} loaded',
+                        text: '{{feature_name.titleCase()}} carregado',
                         typography: AppTypography.heading2,
                       ),
                       const SizedBox(height: 8),

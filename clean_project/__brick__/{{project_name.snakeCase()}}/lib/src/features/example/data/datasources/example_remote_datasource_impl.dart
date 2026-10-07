@@ -1,3 +1,4 @@
+// TODO(api): substitua o endpoint ilustrativo e confira parâmetros, autenticação e resposta.
 import '../../../../core/network/api_client.dart';
 import '../models/example_model.dart';
 import 'example_datasource.dart';

@@ -1,9 +1,9 @@
+// TODO(api): substitua o endpoint ilustrativo e confira parâmetros, autenticação e resposta.
 import '../../../../core/network/api_client.dart';
 import '../models/{{feature_name.snakeCase()}}_model.dart';
 import '{{feature_name.snakeCase()}}_datasource.dart';
 
-class {{feature_name.pascalCase()}}RemoteDataSourceImpl
-    implements {{feature_name.pascalCase()}}DataSource {
+class {{feature_name.pascalCase()}}RemoteDataSourceImpl implements {{feature_name.pascalCase()}}DataSource {
   {{feature_name.pascalCase()}}RemoteDataSourceImpl({required ApiClient apiClient})
     : _apiClient = apiClient;
 

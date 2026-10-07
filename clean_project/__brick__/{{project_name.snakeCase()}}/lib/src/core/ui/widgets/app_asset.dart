@@ -1,7 +1,7 @@
 /*
  * ARQUIVO: lib/src/core/ui/widgets/app_asset.dart
  * RESPONSABILIDADE: Componente unificado para exibição de imagens (SVG, PNG, Network).
- * COMO USAR: Substitui o antigo MemoireAsset e centraliza carregamento de imagens no app.
+ * COMO USAR: Use AppAsset.svg, AppAsset.image ou AppAsset.network; veja os exemplos no README.
  */
 
 import 'package:cached_network_image/cached_network_image.dart';

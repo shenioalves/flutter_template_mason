@@ -1,8 +1,10 @@
 name: {{project_name.snakeCase()}}
-description: "A new Flutter project."
+# TODO(app): descreva o objetivo do seu app.
+description: "Aplicativo Flutter com arquitetura por funcionalidades."
 
 publish_to: "none"
 
+# TODO(lojas): atualize versão e número de build antes de cada publicação.
 version: 1.0.0+1
 
 environment:
@@ -12,13 +14,14 @@ dependencies:
   app_settings: ^7.0.0
   cached_network_image: ^3.4.1
   cupertino_icons: ^1.0.9
-  device_info_plus: ^12.4.0
+  device_info_plus: ^13.2.0
   dio: ^5.9.2
   equatable: ^2.0.8
   event_bus: ^2.0.1
   flutter:
     sdk: flutter
   flutter_bloc: ^9.1.1
+  flutter_dotenv: ^6.0.1
   flutter_secure_storage: ^10.1.0
   flutter_svg: ^2.3.0
   freezed_annotation: ^3.1.0
@@ -42,15 +45,15 @@ dev_dependencies:
   flutter_lints: ^6.0.0
   flutter_test:
     sdk: flutter
+  mocktail: ^1.0.5
+  bloc_test: ^10.0.0
   freezed: ^3.2.5
   json_serializable: ^6.13.2
 
-flutter_launcher_icons:
-  android: true
-  ios: true
-  image_path: "assets/fish.png"
-
 flutter:
   uses-material-design: true
+  # TODO(assets): declare aqui cada pasta nova de imagens, ícones e fontes.
   assets:
-    - assets/
+    - .env
+    - assets/images/
+    - assets/icons/

@@ -1,0 +1,8 @@
+sandbox_mode = "workspace-write"
+developer_instructions = """
+Atue como coordenador. Leia .agents/AGENTS.md e .agents/MULTI_AGENT.md.
+Escolha dinamicamente os perfis necessários, atribua arquivos concretos, evite
+dois escritores no mesmo arquivo e consolide a revisão final. Preserve mudanças
+preexistentes. Reserve para si a integração de módulos, DI e rotas quando não
+houver uma atribuição explícita. Não crie outro orchestrator.
+"""

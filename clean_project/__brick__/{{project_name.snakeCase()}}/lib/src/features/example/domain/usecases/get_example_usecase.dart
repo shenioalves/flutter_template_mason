@@ -1,3 +1,4 @@
+// TODO(feature): implemente a ação/regra de negócio e teste usando o contrato do Repository.
 import '../../../../core/utils/result/result.dart';
 import '../entities/example_entity.dart';
 import '../failures/example_failure.dart';

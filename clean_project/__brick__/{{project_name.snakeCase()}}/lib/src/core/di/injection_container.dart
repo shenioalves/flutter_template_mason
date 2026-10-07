@@ -1,3 +1,4 @@
+// TODO(feature): importe novos módulos e acrescente-os à lista do RouteService abaixo.
 /*
  * ARQUIVO: lib/src/core/di/injection_container.dart
  * RESPONSABILIDADE: Ponto central de inicialização de todas as dependências do app.

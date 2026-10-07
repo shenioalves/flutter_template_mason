@@ -1,3 +1,4 @@
+// TODO(tema): ajuste as dimensões de referência ao layout do novo projeto.
 import 'package:flutter/material.dart';
 
 class ResponsiveUtils {

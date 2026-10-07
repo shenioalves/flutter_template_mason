@@ -1,3 +1,4 @@
+// TODO(api): ajuste o contrato de consulta/gravação às operações da feature.
 import '../models/{{feature_name.snakeCase()}}_model.dart';
 
 abstract interface class {{feature_name.pascalCase()}}DataSource {

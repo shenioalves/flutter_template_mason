@@ -1,4 +1,5 @@
-﻿/*
+// TODO(plataforma): registre aqui implementações de serviços opcionais, como push e compras, após configurá-los.
+/*
  * ARQUIVO: lib/src/core/platform/di/platform_dependencies.dart
  * RESPONSABILIDADE: Indefinida
  * COMO USAR: Agrupador de injeções por módulo/camada.

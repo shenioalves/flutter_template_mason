@@ -24,6 +24,7 @@
         </intent>
     </queries>
 
+    <!-- TODO(app): confirme nome, ícone e permissões antes de publicar. -->
     <application
         android:label="{{project_name.titleCase()}}"
         android:icon="@mipmap/ic_launcher">

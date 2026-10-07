@@ -1,3 +1,4 @@
+// TODO(feature): substitua id/name pelos dados de negócio; mantenha JSON fora da Entity.
 import 'package:equatable/equatable.dart';
 
 class {{feature_name.pascalCase()}}Entity extends Equatable {

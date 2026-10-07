@@ -20,7 +20,7 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
+        // TODO(lojas): confirme o applicationId cadastrado na Google Play antes de publicar.
         applicationId = "{{org_name}}.{{project_name.snakeCase()}}"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
@@ -32,8 +32,8 @@ android {
 
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
+            // TODO(lojas): configure aqui a assinatura release com seu keystore de upload (não a chave pública de compras).
+            // TODO(lojas): substitua debug pela signingConfig release antes de publicar; veja docs/PERSONALIZACAO.md.
             signingConfig = signingConfigs.getByName("debug")
         }
     }

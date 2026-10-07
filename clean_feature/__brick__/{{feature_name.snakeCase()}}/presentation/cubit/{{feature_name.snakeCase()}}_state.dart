@@ -1,3 +1,4 @@
+// TODO(feature): modele vazio e falhas específicas quando necessário; mantenha props atualizado.
 import 'package:equatable/equatable.dart';
 
 import '../../../../core/ui/widgets/views/view_state.dart';
@@ -22,18 +23,15 @@ sealed class {{feature_name.pascalCase()}}State extends Equatable {
   List<Object?> get props => [];
 }
 
-final class {{feature_name.pascalCase()}}Initial
-    extends {{feature_name.pascalCase()}}State {
+final class {{feature_name.pascalCase()}}Initial extends {{feature_name.pascalCase()}}State {
   const {{feature_name.pascalCase()}}Initial();
 }
 
-final class {{feature_name.pascalCase()}}Loading
-    extends {{feature_name.pascalCase()}}State {
+final class {{feature_name.pascalCase()}}Loading extends {{feature_name.pascalCase()}}State {
   const {{feature_name.pascalCase()}}Loading();
 }
 
-final class {{feature_name.pascalCase()}}Success
-    extends {{feature_name.pascalCase()}}State {
+final class {{feature_name.pascalCase()}}Success extends {{feature_name.pascalCase()}}State {
   const {{feature_name.pascalCase()}}Success(this.entity);
 
   final {{feature_name.pascalCase()}}Entity entity;
@@ -42,8 +40,7 @@ final class {{feature_name.pascalCase()}}Success
   List<Object?> get props => [entity];
 }
 
-final class {{feature_name.pascalCase()}}Error
-    extends {{feature_name.pascalCase()}}State {
+final class {{feature_name.pascalCase()}}Error extends {{feature_name.pascalCase()}}State {
   const {{feature_name.pascalCase()}}Error(this.failure);
 
   final FailureInfo<{{feature_name.pascalCase()}}Failure> failure;

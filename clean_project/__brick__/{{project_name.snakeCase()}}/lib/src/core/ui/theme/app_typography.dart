@@ -1,3 +1,4 @@
+// TODO(tema): adicione fontes em assets/fonts e declare-as no pubspec antes de usar fontFamily.
 import 'package:flutter/material.dart';
 
 import 'app_colors.dart';
@@ -7,60 +8,51 @@ class AppTypography {
   AppTypography._();
 
   static const TextStyle display = TextStyle(
-    fontFamily: 'Radio Canada',
     fontSize: 40,
     fontWeight: FontWeight.w700,
   );
 
   static const TextStyle heading1 = TextStyle(
-    fontFamily: 'Radio Canada',
     fontSize: 24,
     fontWeight: FontWeight.w600,
   );
 
   static const TextStyle heading2 = TextStyle(
-    fontFamily: 'Radio Canada',
     fontSize: 20,
     fontWeight: FontWeight.w600,
   );
 
   static const TextStyle heading3 = TextStyle(
-    fontFamily: 'Radio Canada',
     fontSize: 16,
     fontWeight: FontWeight.w600,
   );
 
   static const TextStyle body = TextStyle(
-    fontFamily: 'Radio Canada',
     fontSize: 16,
     fontWeight: FontWeight.w400,
   );
 
   static const TextStyle bodySmall = TextStyle(
-    fontFamily: 'Radio Canada',
     fontSize: 14,
     fontWeight: FontWeight.w400,
   );
 
   static const TextStyle buttonLarge = TextStyle(
-    fontFamily: 'Radio Canada',
     fontSize: 16,
     fontWeight: FontWeight.w600,
   );
 
   static const TextStyle buttonSmall = TextStyle(
-    fontFamily: 'Radio Canada',
     fontSize: 14,
     fontWeight: FontWeight.w600,
   );
 
   static const TextStyle labels = TextStyle(
-    fontFamily: 'Radio Canada',
     fontSize: 10,
     fontWeight: FontWeight.w400,
   );
 
-  static const TextStyle emoji = TextStyle(fontFamily: 'Noto Color Emoji');
+  static const TextStyle emoji = TextStyle();
 
   /// Retorna o TextTheme base para injetar no ThemeData.
   ///

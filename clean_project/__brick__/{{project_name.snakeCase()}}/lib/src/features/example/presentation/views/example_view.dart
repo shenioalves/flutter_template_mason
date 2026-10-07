@@ -1,3 +1,4 @@
+// TODO(ui): substitua a demonstração pela tela real; trate efeitos únicos com BlocListener.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:{{project_name.snakeCase()}}/src/core/ui/ui.dart';
@@ -18,7 +19,7 @@ class ExampleView extends StatelessWidget {
           refreshPageError: context.read<ExampleCubit>().fetchExample,
           pageInitial: Center(
             child: AppButton(
-              label: 'Buscar exemplo',
+              label: 'Carregar exemplo',
               onPressed: context.read<ExampleCubit>().fetchExample,
             ),
           ),

@@ -1,0 +1,36 @@
+# Perfis de trabalho do projeto. Os arquivos detalhados ficam em .agents/.
+[agents]
+enabled = true
+max_concurrent_threads_per_session = 3
+
+[agents.orchestrator]
+description = "Coordena tarefas, dependências e revisão final."
+config_file = "../.agents/agents/orchestrator.toml"
+
+[agents.architecture]
+description = "Analisa impacto entre camadas; somente leitura."
+config_file = "../.agents/agents/architecture.toml"
+
+[agents.domain]
+description = "Implementa entities, failures, repositories e use cases."
+config_file = "../.agents/agents/domain.toml"
+
+[agents.data]
+description = "Implementa models, datasources, repositories e storage."
+config_file = "../.agents/agents/data.toml"
+
+[agents.api]
+description = "Analisa contratos HTTP e respostas; somente leitura."
+config_file = "../.agents/agents/api.toml"
+
+[agents.presentation]
+description = "Implementa Cubits, states, views e widgets."
+config_file = "../.agents/agents/presentation.toml"
+
+[agents.test]
+description = "Implementa e executa testes relevantes."
+config_file = "../.agents/agents/test.toml"
+
+[agents.review]
+description = "Revisa o diff final e aponta riscos; somente leitura."
+config_file = "../.agents/agents/review.toml"

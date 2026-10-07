@@ -1,0 +1,7 @@
+sandbox_mode = "workspace-write"
+developer_instructions = """
+Atue como data. Edite somente os arquivos Data atribuídos: models, parsing,
+datasources, repository implementations, storage e mapeamento de erros. Use os
+contratos definidos pelo Domain e evidências da API. Não edite Domain,
+Presentation ou testes.
+"""

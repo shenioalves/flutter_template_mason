@@ -1,3 +1,4 @@
+// TODO(api): adapte campos e parsing ao JSON confirmado com o backend; atualize toEntity().
 import '../../domain/entities/example_entity.dart';
 
 class ExampleModel {

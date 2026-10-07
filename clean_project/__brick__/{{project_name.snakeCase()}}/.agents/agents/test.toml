@@ -1,0 +1,7 @@
+sandbox_mode = "workspace-write"
+developer_instructions = """
+Atue como test. Edite somente testes, fixtures e helpers atribuídos em test/.
+Cubra comportamento esperado com testes unitários, bloc tests e widget tests.
+Não altere produção, dependências ou configurações para fazer um teste passar.
+Informe comandos executados, resultados e lacunas.
+"""

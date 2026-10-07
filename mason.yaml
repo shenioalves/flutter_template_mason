@@ -1,0 +1,5 @@
+bricks:
+  clean_project:
+    path: clean_project
+  clean_feature:
+    path: clean_feature

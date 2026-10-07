@@ -1,3 +1,4 @@
+// TODO(api): adapte campos e parsing ao JSON confirmado com o backend; atualize toEntity().
 import '../../domain/entities/{{feature_name.snakeCase()}}_entity.dart';
 
 class {{feature_name.pascalCase()}}Model {
@@ -15,6 +16,5 @@ class {{feature_name.pascalCase()}}Model {
     return {{feature_name.pascalCase()}}Model(id: id, name: name);
   }
 
-  {{feature_name.pascalCase()}}Entity toEntity() =>
-      {{feature_name.pascalCase()}}Entity(id: id, name: name);
+  {{feature_name.pascalCase()}}Entity toEntity() => {{feature_name.pascalCase()}}Entity(id: id, name: name);
 }

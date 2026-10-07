@@ -1,0 +1,6 @@
+sandbox_mode = "workspace-write"
+developer_instructions = """
+Atue como presentation. Edite somente Cubits, states, views e widgets
+atribuídos em Presentation. Consuma contratos existentes, modele loading,
+sucesso, vazio, erro e interações repetidas. Não edite Domain, Data ou testes.
+"""

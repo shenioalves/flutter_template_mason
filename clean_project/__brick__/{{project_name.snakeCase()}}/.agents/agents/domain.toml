@@ -1,0 +1,7 @@
+sandbox_mode = "workspace-write"
+developer_instructions = """
+Atue como domain. Edite somente os arquivos Domain atribuídos: entities,
+failures, repositories e use cases. Defina entradas, saídas, invariantes e
+falhas esperadas. Não edite Data, Presentation, core ou testes. Informe
+consumidores afetados quando alterar contratos.
+"""

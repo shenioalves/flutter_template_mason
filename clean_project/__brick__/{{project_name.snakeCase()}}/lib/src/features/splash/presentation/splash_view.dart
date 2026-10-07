@@ -1,3 +1,4 @@
+// TODO(inicio): substitua a ida ao exemplo pelo fluxo inicial real, usando um UseCase se houver sessão.
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:{{project_name.snakeCase()}}/src/core/ui/ui.dart';

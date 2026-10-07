@@ -1,4 +1,4 @@
-﻿/*
+/*
  * ARQUIVO: lib/src/my_app.dart
  * RESPONSABILIDADE: Widget principal da aplicação.
  * COMO USAR: Widget raiz da aplicação, configura MaterialApp e serviços globais.
@@ -22,7 +22,8 @@ class MyApp extends StatelessWidget {
       value: InjectionContainer.injector,
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
-        title: 'Flutter Clean Architecture',
+        // TODO(app): ajuste o título exibido pelo sistema se o nome comercial for diferente.
+        title: '{{project_name.titleCase()}}',
         theme: AppTheme.getTheme(),
         routerConfig: routeService.router,
       ),

@@ -1,3 +1,4 @@
+// TODO(tema): adicione fontes em assets/fonts e declare-as no pubspec antes de usar fontFamily.
 import 'package:flutter/material.dart';
 
 import 'app_colors.dart';
@@ -12,7 +13,6 @@ class AppTheme {
     final textTheme = AppTypography.getTextTheme();
 
     return ThemeData(
-      fontFamily: 'Radio Canada',
       primaryColor: AppColors.violet_0,
       splashColor: AppColors.violet_0,
       appBarTheme: const AppBarTheme(
@@ -22,20 +22,11 @@ class AppTheme {
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ButtonStyle(
           shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10.0),
-            ),
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
           ),
-          minimumSize: WidgetStateProperty.all<Size>(
-            Size(
-              double.infinity,
-              40,
-            ),
-          ),
+          minimumSize: WidgetStateProperty.all<Size>(Size(double.infinity, 40)),
           elevation: WidgetStateProperty.all<double>(0),
-          backgroundColor: WidgetStateProperty.all<Color>(
-            AppColors.violet_350,
-          ),
+          backgroundColor: WidgetStateProperty.all<Color>(AppColors.violet_350),
         ),
       ),
       navigationBarTheme: const NavigationBarThemeData(
@@ -52,11 +43,7 @@ class AppTheme {
           borderSide: const BorderSide(color: AppColors.violet_400, width: 2.0),
           borderRadius: BorderRadius.circular(10.0),
         ),
-        contentPadding: EdgeInsets.only(
-          top: 10,
-          bottom: 10,
-          left: 20,
-        ),
+        contentPadding: EdgeInsets.only(top: 10, bottom: 10, left: 20),
         border: const OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(10)),
         ),
@@ -70,10 +57,7 @@ class AppTheme {
         buttonColor: Color(0xFFF9A557),
         textTheme: ButtonTextTheme.primary,
       ),
-      iconTheme: IconThemeData(
-        color: const Color(0xFF0E151A),
-        size: 35,
-      ),
+      iconTheme: IconThemeData(color: const Color(0xFF0E151A), size: 35),
     );
   }
 }

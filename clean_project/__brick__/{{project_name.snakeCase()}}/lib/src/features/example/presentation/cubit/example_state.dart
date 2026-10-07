@@ -1,3 +1,4 @@
+// TODO(feature): modele vazio e falhas específicas quando necessário; mantenha props atualizado.
 import 'package:equatable/equatable.dart';
 
 import '../../../../core/ui/widgets/views/view_state.dart';

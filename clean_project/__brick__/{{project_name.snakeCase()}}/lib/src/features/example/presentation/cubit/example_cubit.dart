@@ -1,3 +1,4 @@
+// TODO(feature): adicione as ações da tela; injete novos UseCases pelo construtor e pelo módulo.
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/logger/app_logger.dart';
@@ -16,8 +17,10 @@ class ExampleCubit extends Cubit<ExampleState> {
   final AppLogger _logger;
 
   Future<void> fetchExample() async {
+    if (isClosed || state is ExampleLoading) return;
     emit(const ExampleLoading());
     final result = await _getExampleUseCase();
+    if (isClosed) return;
     result.fold((failure) {
       _logger.error('[ExampleCubit] ${failure.message}');
       emit(ExampleError(failure));
